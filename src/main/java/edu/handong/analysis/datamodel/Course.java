@@ -23,9 +23,14 @@ public class Course {
 		courseName = tempString[5];
 		courseCredit = tempString[6];
 		yearTaken = Integer.parseInt(tempString[7]);
-		semesterCourseTaken = Integer.parseInt(tempString[8]);
-		
+		semesterCourseTaken = Integer.parseInt(tempString[8]);		
 	}
 	
+	public int getYearTaken() {
+		return yearTaken;
+	}
 	
+	public int getSemesterCourseTaken() {
+		return semesterCourseTaken;
+	}
 }
