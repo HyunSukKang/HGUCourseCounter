@@ -34,26 +34,22 @@ public class HGUCoursePatternAnalyzer {
 		String dataPath = args[0]; // csv file to be analyzed
 		String resultPath = args[1]; // the file path where the results are saved.
 		ArrayList<String> lines = Utils.getLines(dataPath, true);
-//		for(String s : lines) {
-//			System.out.println(s);
-//		}
-		
-		System.out.println("DEBUG>> getLines complete!");
+//		System.out.println("DEBUG>> getLines complete!");
 		
 		students = loadStudentCourseRecords(lines);
-		System.out.println("DEBUG>> loadStudentCourseRecords complete!");
+//		System.out.println("DEBUG>> loadStudentCourseRecords complete!");
 		
 		// To sort HashMap entries by key values so that we can save the results by student ids in ascending order.
 		Map<String, Student> sortedStudents = new TreeMap<String,Student>(students);
-		System.out.println("DEBUG>> Make sortedStudents complete");
+//		System.out.println("DEBUG>> Make sortedStudents complete");
 		
 		// Generate result lines to be saved.
 		ArrayList<String> linesToBeSaved = countNumberOfCoursesTakenInEachSemester(sortedStudents);
-		System.out.println("DEBUG>> linesToBeSaved complete!");
+//		System.out.println("DEBUG>> linesToBeSaved complete!");
 		
 		// Write a file (named like the value of resultPath) with linesTobeSaved.
 		Utils.writeAFile(linesToBeSaved, resultPath);
-		System.out.println("DEBUG>> writeAFile complete!");
+//		System.out.println("DEBUG>> writeAFile complete!");
 	}
 	
 	/**
@@ -71,26 +67,19 @@ public class HGUCoursePatternAnalyzer {
 		
 		for(String s : lines) {
 			tempSID = s.trim().split(",")[0];
-//			System.out.println("Split : " + tempSID);
 			
 			flag = students.containsKey(tempSID);
-//			System.out.println("True or Flase : " + flag);
 			
 			if(flag == false) {
 				student = new Student(tempSID);
-//				System.out.println("Student : " + student.getStudentId());
-			
 				Course course = new Course(s);
-//				System.out.println("Course : " + course.getStudentId());
 				student.addCourse(course);
 				
 				students.put(tempSID, student);
 			}
 			else {
 				Course course = new Course(s);
-//				System.out.println("Course : " + course.getStudentId());
 				student.addCourse(course);
-				
 			}
 		}
 		
