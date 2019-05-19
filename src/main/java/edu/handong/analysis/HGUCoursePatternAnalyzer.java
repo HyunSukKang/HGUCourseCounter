@@ -3,6 +3,7 @@ package edu.handong.analysis;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import edu.handong.analysis.datamodel.Course;
@@ -33,17 +34,26 @@ public class HGUCoursePatternAnalyzer {
 		String dataPath = args[0]; // csv file to be analyzed
 		String resultPath = args[1]; // the file path where the results are saved.
 		ArrayList<String> lines = Utils.getLines(dataPath, true);
+//		for(String s : lines) {
+//			System.out.println(s);
+//		}
+		
+		System.out.println("DEBUG>> getLines complete!");
 		
 		students = loadStudentCourseRecords(lines);
+		System.out.println("DEBUG>> loadStudentCourseRecords complete!");
 		
 		// To sort HashMap entries by key values so that we can save the results by student ids in ascending order.
-		Map<String, Student> sortedStudents = new TreeMap<String,Student>(students); 
+		Map<String, Student> sortedStudents = new TreeMap<String,Student>(students);
+		System.out.println("DEBUG>> Make sortedStudents complete");
 		
 		// Generate result lines to be saved.
 		ArrayList<String> linesToBeSaved = countNumberOfCoursesTakenInEachSemester(sortedStudents);
+		System.out.println("DEBUG>> linesToBeSaved complete!");
 		
 		// Write a file (named like the value of resultPath) with linesTobeSaved.
 		Utils.writeAFile(linesToBeSaved, resultPath);
+		System.out.println("DEBUG>> writeAFile complete!");
 	}
 	
 	/**
@@ -52,23 +62,33 @@ public class HGUCoursePatternAnalyzer {
 	 * @param lines
 	 * @return
 	 */
+	
 	private HashMap<String,Student> loadStudentCourseRecords(ArrayList<String> lines) {
-		String tempString;
+		students = new HashMap<String, Student>();
 		String tempSID;
 		Student student = null;
-		for(int i=0; i<lines.size(); i++) {
-			tempString = lines.get(i);
-			tempSID = tempString.trim().split(",")[0];
+		boolean flag;
+		
+		for(String s : lines) {
+			tempSID = s.trim().split(",")[0];
+//			System.out.println("Split : " + tempSID);
 			
-			if(!students.containsKey(tempSID)) {
+			flag = students.containsKey(tempSID);
+//			System.out.println("True or Flase : " + flag);
+			
+			if(flag == false) {
 				student = new Student(tempSID);
-				Course course = new Course(tempString);
+//				System.out.println("Student : " + student.getStudentId());
+			
+				Course course = new Course(s);
+//				System.out.println("Course : " + course.getStudentId());
 				student.addCourse(course);
 				
 				students.put(tempSID, student);
 			}
 			else {
-				Course course = new Course(tempString);
+				Course course = new Course(s);
+//				System.out.println("Course : " + course.getStudentId());
 				student.addCourse(course);
 				
 			}
@@ -91,9 +111,31 @@ public class HGUCoursePatternAnalyzer {
 	 * @return
 	 */
 	private ArrayList<String> countNumberOfCoursesTakenInEachSemester(Map<String, Student> sortedStudents) {
+		ArrayList<String> linesToBeSaved = new ArrayList<String>();
+		Set<String> sidSet = sortedStudents.keySet();
+		Object[] sidArray = sidSet.toArray();
+		Student student;
+		String StudentID;
+		int TotalNumberOfSemestersRegistered;
+		int Semester;
+		int NumCoursesTakenInTheSemester;
+		String Head = "StudentID, TotalNumberOfSemestersRegistered, Semester, NumCoursesTakenInTheSemester";
+		String tempLine;
 		
+		linesToBeSaved.add(Head);
 		
+		for(int i=0; i<sidArray.length; i++) {
+			StudentID = sidArray[i].toString();
+			student = sortedStudents.get(StudentID);
+			TotalNumberOfSemestersRegistered = student.getSemestersByYearAndSemester().size();
+			for(int j=1; j<=TotalNumberOfSemestersRegistered; j++) {
+				Semester = j;
+				NumCoursesTakenInTheSemester = student.getNumCourseInNthSementer(Semester);
+				tempLine = StudentID + ", " + Integer.toString(TotalNumberOfSemestersRegistered) + ", " + Integer.toString(Semester) + ", " + Integer.toString(NumCoursesTakenInTheSemester);
+				linesToBeSaved.add(tempLine);
+			}
+		}
 		
-		return null; // do not forget to return a proper variable.
+		return linesToBeSaved; // do not forget to return a proper variable.
 	}
 }

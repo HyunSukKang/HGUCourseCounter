@@ -10,10 +10,11 @@ public class Student {
 	
 	public Student(String studentId) {
 		this.studentId = studentId;
+		coursesTaken = new ArrayList<Course>();
+		semestersByYearAndSemester = new HashMap<String, Integer>();
 	}
 	public void addCourse(Course newRecord) {
 		coursesTaken.add(newRecord);
-		
 	}
 	public HashMap<String, Integer> getSemestersByYearAndSemester(){
 		int semester = 1;
@@ -45,5 +46,8 @@ public class Student {
 		}
 		
 		return count;
+	}
+	public String getStudentId() {
+		return studentId;
 	}
 }
