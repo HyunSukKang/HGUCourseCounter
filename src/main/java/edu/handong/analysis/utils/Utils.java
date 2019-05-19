@@ -3,6 +3,7 @@ package edu.handong.analysis.utils;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -45,8 +46,28 @@ public class Utils {
 	}
 
 	public static void writeAFile(ArrayList<String> lines, String targetFileName) {
+		FileWriter csvWriter = null;
+		try {
+			csvWriter = new FileWriter(targetFileName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
+		for(String s : lines) {
+			try {
+				csvWriter.write(s);
+				csvWriter.append("\n");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
+		try {
+			csvWriter.flush();
+			csvWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -27,8 +27,7 @@ public class Student {
 				semester++;
 			}
 		}
-		
-		
+			
 		return semestersByYearAndSemester;
 	}
 	public int getNumCourseInNthSementer(int semester) {

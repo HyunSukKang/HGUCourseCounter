@@ -70,8 +70,8 @@ public class HGUCoursePatternAnalyzer {
 			else {
 				Course course = new Course(tempString);
 				student.addCourse(course);
+				
 			}
-			
 		}
 		
 		return students;
@@ -92,7 +92,7 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private ArrayList<String> countNumberOfCoursesTakenInEachSemester(Map<String, Student> sortedStudents) {
 		
-		// TODO: Implement this method
+		
 		
 		return null; // do not forget to return a proper variable.
 	}
