@@ -18,7 +18,6 @@ public class Utils {
 		
 		try {
 			csvR = new FileReader(file);
-//			if(!csvR) throw new FileNotFoundException("The file path does not exist. Please check your CLI argument!");
 			csvReader = new BufferedReader(csvR);
 		} catch (FileNotFoundException e) {
 			System.out.println("The file path does not exist. Please check your CLI argument!");
