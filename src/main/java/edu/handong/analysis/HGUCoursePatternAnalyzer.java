@@ -121,7 +121,7 @@ public class HGUCoursePatternAnalyzer {
 			for(int j=1; j<=TotalNumberOfSemestersRegistered; j++) {
 				Semester = j;
 				NumCoursesTakenInTheSemester = student.getNumCourseInNthSementer(Semester);
-				tempLine = StudentID + ", " + Integer.toString(TotalNumberOfSemestersRegistered) + ", " + Integer.toString(Semester) + ", " + Integer.toString(NumCoursesTakenInTheSemester);
+				tempLine = StudentID + "," + Integer.toString(TotalNumberOfSemestersRegistered) + "," + Integer.toString(Semester) + "," + Integer.toString(NumCoursesTakenInTheSemester);
 				linesToBeSaved.add(tempLine);
 			}
 		}

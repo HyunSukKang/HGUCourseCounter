@@ -14,7 +14,6 @@ public class Utils {
 		String row;
 		FileReader csvR = null;
 		BufferedReader csvReader = null;
-		int count = 0;
 		
 		try {
 			csvR = new FileReader(file);
@@ -23,25 +22,20 @@ public class Utils {
 			System.out.println("The file path does not exist. Please check your CLI argument!");
 			System.exit(0);
 		}
+		if(removeHeader)
+			try {
+				csvReader.readLine();
+			} catch (IOException e1) {
+				e1.getMessage();
+			}
 		
 		try {
 			while((row = csvReader.readLine()) != null) {
-				if(removeHeader) {
-					if(count == 0) {}
-					else {
-						lines.add(row);
-					}
-				}
-				else {
-					lines.add(row);
-				}
-				
-				count++;
+				lines.add(row);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		
 		return lines;
 	}
@@ -60,7 +54,7 @@ public class Utils {
 				csvWriter.write(s);
 				csvWriter.append("\n");
 			} catch (IOException e) {
-				e.printStackTrace();
+				e.getMessage();
 			}
 		}
 		
@@ -68,7 +62,7 @@ public class Utils {
 			csvWriter.flush();
 			csvWriter.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			e.getMessage();
 		}
 	}
 
