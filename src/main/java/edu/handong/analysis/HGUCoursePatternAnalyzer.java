@@ -99,6 +99,7 @@ public class HGUCoursePatternAnalyzer {
 	 * @param sortedStudents
 	 * @return
 	 */
+	
 	private ArrayList<String> countNumberOfCoursesTakenInEachSemester(Map<String, Student> sortedStudents) {
 		ArrayList<String> linesToBeSaved = new ArrayList<String>();
 		Set<String> sidSet = sortedStudents.keySet();

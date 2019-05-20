@@ -18,9 +18,11 @@ public class Utils {
 		
 		try {
 			csvR = new FileReader(file);
+//			if(!csvR) throw new FileNotFoundException("The file path does not exist. Please check your CLI argument!");
 			csvReader = new BufferedReader(csvR);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("The file path does not exist. Please check your CLI argument!");
+			System.exit(0);
 		}
 		
 		try {
@@ -50,7 +52,8 @@ public class Utils {
 		try {
 			csvWriter = new FileWriter(targetFileName);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("The file path does not exist. Please check your CLI argument!");
+			System.exit(0);
 		}
 		
 		for(String s : lines) {
