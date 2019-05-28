@@ -20,10 +20,13 @@ public class Utils {
 		
 		try {
 			reader = Files.newBufferedReader(Paths.get(file));
-			csvParser = new CSVParser(reader, CSVFormat.DEFAULT
-					.withFirstRecordAsHeader()
-                    .withIgnoreHeaderCase()
-                    .withTrim());
+			if(removeHeader) {
+				csvParser = new CSVParser(reader, CSVFormat.DEFAULT
+						.withFirstRecordAsHeader()
+	                    .withIgnoreHeaderCase()
+	                    .withTrim());
+			}
+			else csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
 		} catch (IOException e) {
 			System.out.println("The file path does not exist. Please check your CLI argument!");
 			System.exit(0);
