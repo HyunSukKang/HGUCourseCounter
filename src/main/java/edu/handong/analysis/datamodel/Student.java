@@ -46,7 +46,16 @@ public class Student {
 		
 		return count;
 	}
+	public boolean isRegistered(String yearAndSemester) {
+		if(semestersByYearAndSemester.containsKey(yearAndSemester)) {
+			return true;
+		}
+		else return false;
+	}
 	public String getStudentId() {
 		return studentId;
+	}
+	public ArrayList<Course> getCoursesTaken(){
+		return coursesTaken;
 	}
 }

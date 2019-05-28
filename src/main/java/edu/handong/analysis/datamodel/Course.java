@@ -29,12 +29,16 @@ public class Course {
 	public String getStudentId() {
 		return studentId;
 	}
-	
 	public int getYearTaken() {
 		return yearTaken;
 	}
-	
 	public int getSemesterCourseTaken() {
 		return semesterCourseTaken;
+	}
+	public String getCourseCode() {
+		return courseCode;
+	}
+	public String getCourseName() {
+		return courseName;
 	}
 }
