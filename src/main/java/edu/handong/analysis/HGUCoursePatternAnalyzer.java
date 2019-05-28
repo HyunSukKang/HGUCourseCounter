@@ -14,6 +14,7 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
+import org.apache.commons.csv.CSVRecord;
 
 import edu.handong.analysis.datamodel.Course;
 import edu.handong.analysis.datamodel.Student;
@@ -57,7 +58,7 @@ public class HGUCoursePatternAnalyzer {
 			
 			String dataPath = input;
 			String resultPath = output;
-			ArrayList<String> lines = Utils.getLines(dataPath, true);
+			ArrayList<CSVRecord> lines = Utils.getLines(dataPath, true);
 			
 			students = loadStudentCourseRecords(lines);
 			Map<String, Student> sortedStudents = new TreeMap<String, Student>(students);
@@ -116,16 +117,16 @@ public class HGUCoursePatternAnalyzer {
 	 * @return
 	 */
 	
-	private HashMap<String,Student> loadStudentCourseRecords(ArrayList<String> lines) {
+	private HashMap<String,Student> loadStudentCourseRecords(ArrayList<CSVRecord> lines) {
 		students = new HashMap<String, Student>();
 		String tempSID;
 		int tempYear;
 		Student student = null;
 		boolean flag;
 		
-		for(String s : lines) {
-			tempSID = s.trim().split(",")[0];
-			tempYear = Integer.parseInt(s.trim().split(",")[7].trim());
+		for(CSVRecord s : lines) {
+			tempSID = s.get(0);
+			tempYear = Integer.parseInt(s.get(7));
 			
 			if(tempYear >= startyear && tempYear <= endyear) {
 				flag = students.containsKey(tempSID);

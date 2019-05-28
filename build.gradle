@@ -18,6 +18,7 @@ repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+	
 }
 
 dependencies {
@@ -32,4 +33,11 @@ dependencies {
     
      // https://mvnrepository.com/artifact/commons-cli/commons-cli
 	compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+	
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-csv
+	compile: 'org.apache.commons', name: 'commons-csv', version: '1.5'
+	
+	// compile "org.apache.commons:commons-csv:1.5"
 }
+
+
